@@ -4,7 +4,11 @@
 
 
 body {
+<<<<<<< HEAD
     line-height: 1.5;
+=======
+    line-height: 1.5;;
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
 }
 
 
@@ -36,11 +40,17 @@ $ratio-multiplier : (
   "1" : 13,
   "2" : 8,
   "3" : 4,
+<<<<<<< HEAD
   "4" : 1, 
 );
 
 $line-height : 1.5;
 
+=======
+  "4" : 2, 
+);
+
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
 @function ratio-multiplier($key) {
   @return map-get($ratio-multiplier, $key )
 }
@@ -65,12 +75,15 @@ $line-height : 1.5;
   @return $value;
 }
 
+<<<<<<< HEAD
 @function baseline($size, $number) {
   $lineHeight: $line-height / $size;
 
   @return $lineHeight * $number
 }
 
+=======
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
 
 
 $type-base-size: 1.66666rem;
@@ -86,7 +99,10 @@ $level-size: $type-base-size;
 @each $level in $type-levels {
     $level-size: $type-base-size * pow($type-size-ratio, ratio-multiplier(#{$level})); //1.875rem 2)
     $type-styles: map-merge($type-styles, (#{"h"}$level: $level-size ));
+<<<<<<< HEAD
     $level-unitless: $level-size / ($level-size * 0 + 1);
+=======
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
 
    // Output heading styles
    // Assign to element and create utility class
@@ -95,11 +111,19 @@ $level-size: $type-base-size;
       // Fallback for browsers that don't support min / max
       font-size: $level-size;
       line-height: calc(2px + 2ex + 2px);
+<<<<<<< HEAD
       margin-bottom: baseline($level-unitless, 1.5) * 1em;
       
       // margin-bottom: 0.65em;
 
       @if ($type-size-ratio > 1.067) {        
+=======
+      margin-bottom: 0.65em;
+
+      @if ($type-size-ratio > 1.067) {
+        $level-unitless: $level-size / ($level-size * 0 + 1);
+        
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
         // Set minimum size to a percentage less than $level-size
         // Reduction is greater for large font sizes (> 4rem) to help
         // prevent overflow due to font-size on mobile devices
@@ -119,6 +143,7 @@ $level-size: $type-base-size;
       }
     }   
 }
+<<<<<<< HEAD
 
 
 h1 {
@@ -140,3 +165,5 @@ h3 {
 }
 
 
+=======
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d

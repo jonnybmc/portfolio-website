@@ -3,16 +3,22 @@ import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
+<<<<<<< HEAD
 import Billboard from '../components/billboard';
+=======
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
 import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import Post from '../types/post'
 import Nav from '../components/nav';
 import {navLinks} from '../lib/constants';
+<<<<<<< HEAD
 import avatar from '../public/assets/avatar.png';
 import Image from 'next/image';
 
+=======
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
 
 type Props = {
   allPosts: Post[]
@@ -24,6 +30,7 @@ const Index = ({ allPosts }: Props) => {
 const posts = allPosts;
   return (
     <>
+<<<<<<< HEAD
     <div>
       <Image src={avatar}/>
     </div>
@@ -37,6 +44,14 @@ const posts = allPosts;
       </section>
       </>
     // <> 
+=======
+      <h1> Hi, I’m Jonny. </h1>
+      <h2> Almost before we knew it , we had already left the ground</h2>
+      <h3> Almost before we knew it , we had already left the ground</h3>
+      <h4> Almost before we knew it , we had already left the ground</h4>
+    </>
+    // <>
+>>>>>>> 9fe2a714906a74f0eafcc22592c4dffe7435383d
     //   <Layout>
     //     <Head>
     //       <title>Next.js Blog Example with {CMS_NAME}</title>
