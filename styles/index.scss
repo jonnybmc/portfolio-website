@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    line-height: 1.5;
+}
+
+
+p,
+li,
+h1,
+h2,
+h3,
+h4 {
+    //  Help prevent overflow of long words/names/URLs 
+  overflow-wrap: break-word;
+
+  // Optional, not supported for all languages 
+  hyphens: auto;
+}
+
+$type-ratios : (
+  "minorSecond" : 1.067,
+  "majorSecond" : 1.125,
+  "minorThird" : 1.2,
+  "majorThird" : 1.25,
+  "perfectFourth" : 1.333,
+  "augmentedFourth" : 1.414,
+  "perfectFifth" : 1.5,
+  "goldenRatio" : 1.618,
+);
+
+$ratio-multiplier : (
+  "1" : 13,
+  "2" : 8,
+  "3" : 4,
+  "4" : 1, 
+);
+
+$line-height : 1.5;
+
+@function ratio-multiplier($key) {
+  @return map-get($ratio-multiplier, $key )
+}
+
+@function type-ratio($key) {
+  @return map-get($type-ratios, $key);
+}
+
+@function type-style($key) {
+  @return map-get($type-styles, $key);
+}
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
+@function baseline($size, $number) {
+  $lineHeight: $line-height / $size;
+
+  @return $lineHeight * $number
+}
+
+
+
+$type-base-size: 1.66666rem;
+
+$type-size-ratio: type-ratio("majorSecond");
+
+$type-levels: 1,2,3,4;
+
+$type-styles:();
+$level-size: $type-base-size;
+
+
+@each $level in $type-levels {
+    $level-size: $type-base-size * pow($type-size-ratio, ratio-multiplier(#{$level})); //1.875rem 2)
+    $type-styles: map-merge($type-styles, (#{"h"}$level: $level-size ));
+    $level-unitless: $level-size / ($level-size * 0 + 1);
+
+   // Output heading styles
+   // Assign to element and create utility class
+    h#{$level},
+    .h#{$level} {
+      // Fallback for browsers that don't support min / max
+      font-size: $level-size;
+      line-height: calc(2px + 2ex + 2px);
+      margin-bottom: baseline($level-unitless, 1.5) * 1em;
+      
+      // margin-bottom: 0.65em;
+
+      @if ($type-size-ratio > 1.067) {        
+        // Set minimum size to a percentage less than $level-size
+        // Reduction is greater for large font sizes (> 4rem) to help
+        // prevent overflow due to font-size on mobile devices
+        $fluid-reduction: if($level-size > 4, 0.5, 0.33);
+        $fluid-min: $level-unitless - ($fluid-reduction * $level-unitless);
+
+        // Prevent dropping lower than 1rem (body font-size)
+        $fluid-min: if($fluid-min > $type-base-size, $fluid-min, 1);
+
+        $fluid-scaler: ($level-unitless - $fluid-min) + 4vw;
+
+        font-size: clamp(
+          #{$fluid-min}rem,
+          #{$fluid-scaler} + 1rem,
+         #{$level-size}
+        );
+      }
+    }   
+}
+
+
+h1 {
+  font-weight:bold;
+}
+
+h4 {
+  text-transform: uppercase;
+  font-weight:bold;
+  letter-spacing: 0.1em;
+}
+
+h3 {
+  text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: #787878;
+    font-weight: 600;
+}
+
+
